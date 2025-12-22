@@ -18,7 +18,6 @@ export const passwordMatchValidator: ValidatorFn = (
         return { passwordMismatch: true };
     }
 
-    // 🔹 CLEANUP when values match again
     if (confirmCtrl.hasError('mismatch')) {
         const { mismatch, ...rest } = confirmCtrl.errors || {};
         confirmCtrl.setErrors(Object.keys(rest).length ? rest : null);

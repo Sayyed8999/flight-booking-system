@@ -4,7 +4,6 @@
 
     <form [formGroup]="form" (ngSubmit)="submit()" class="form">
 
-        <!-- Contact Details -->
         <section class="section">
             <h2 class="section-title">Contact Details</h2>
 
@@ -21,7 +20,6 @@
             </div>
         </section>
 
-        <!-- Passengers -->
         <section class="section">
             <h2 class="section-title">Passengers</h2>
 
@@ -30,7 +28,6 @@
                 @for (passenger of passengers.controls; track i; let i = $index) {
                 <div class="passenger-card" [formGroupName]="i">
 
-                    <!-- Card header -->
                     <div class="passenger-header">
                         <span>Passenger {{ i + 1 }}</span>
 
@@ -41,7 +38,6 @@
                         }
                     </div>
 
-                    <!-- Identity -->
                     <div class="identity-grid">
                         <mat-form-field appearance="outline">
                             <mat-label>Full Name</mat-label>
@@ -54,7 +50,6 @@
                         </mat-form-field>
                     </div>
 
-                    <!-- Gender -->
                     <div class="gender-group">
                         <label class="group-label">Gender</label>
                         <mat-radio-group formControlName="gender">
@@ -64,7 +59,6 @@
                         </mat-radio-group>
                     </div>
 
-                    <!-- Seat preference -->
                     <mat-form-field appearance="outline">
                         <mat-label>Seat Preference</mat-label>
                         <mat-select formControlName="seatPreference">

@@ -31,7 +31,6 @@ export class FlightResults implements OnInit {
 
     const state = history.state as { searchPayload?: any };
 
-    // 🔴 Direct access / refresh → no payload
     if (!state?.searchPayload) {
       this.router.navigate(['/flights']);
       return;

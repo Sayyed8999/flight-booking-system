@@ -13,7 +13,6 @@
     </div>
     } @else {
 
-    <!-- Flight Summary -->
     <mat-card class="summary-card">
         <h2>Flight Details</h2>
 
@@ -36,7 +35,6 @@
         </div>
     </mat-card>
 
-    <!-- Passenger Summary -->
     <mat-card class="summary-card">
         <h2>Passengers</h2>
 
@@ -51,14 +49,12 @@
         }
     </mat-card>
 
-    <!-- Contact -->
     <mat-card class="summary-card">
         <h2>Contact</h2>
         <div>{{ vm.passengerDetails.contactEmail }}</div>
         <div>{{ vm.passengerDetails.contactPhone }}</div>
     </mat-card>
 
-    <!-- Actions -->
     <div class="actions">
         <button mat-stroked-button (click)="goBack()">Back</button>
         <button mat-flat-button color="primary" (click)="confirmBooking()">

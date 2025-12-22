@@ -12,14 +12,12 @@
                 <a mat-button routerLink="/flights">Flights</a>
             </nav>
 
-            <!-- NOT LOGGED IN -->
             @if (!isLoggedIn) {
             <button mat-button class="auth-cta" (click)="handleLogin()">
                 Login
             </button>
             }
 
-            <!-- LOGGED IN -->
             @if (isLoggedIn) {
             <button mat-icon-button [matMenuTriggerFor]="userMenu" aria-label="User menu">
                 <mat-icon>account_circle</mat-icon>

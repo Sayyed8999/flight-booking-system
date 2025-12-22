@@ -11,20 +11,17 @@
     <div class="auth-dialog-panel">
         <mat-dialog-content>
 
-            <!-- REGISTER STEP -->
             <ng-container *ngIf="currentStep === SignupStep.REGISTER">
                 <app-signup-register [loading]="loading" (registered)="handleRegistered($event)">
                 </app-signup-register>
             </ng-container>
 
-            <!-- VERIFY OTP STEP -->
             <ng-container *ngIf="currentStep === SignupStep.VERIFY_OTP">
                 <app-signup-otp [email]="email" [loading]="loading"
                     (verified)="setCurrentStep(SignupStep.SET_PASSWORD)">
                 </app-signup-otp>
             </ng-container>
 
-            <!-- SET PASSWORD STEP -->
             <ng-container *ngIf="currentStep === SignupStep.SET_PASSWORD">
                 <app-signup-set-password [email]="email" [loading]="loading" (signupComplete)="closeDialog()">
                 </app-signup-set-password>

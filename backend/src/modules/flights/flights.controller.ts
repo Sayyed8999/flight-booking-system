@@ -14,19 +14,16 @@ export const searchFlightsController = async (req: Request, res: Response) => {
             cabinClass
         } = req.body;
 
-        // 🔹 Passenger count
         const totalPassengers =
             passengers.adults +
             passengers.children +
             passengers.infants;
 
-        // 🔹 Outbound date range
         const outboundRange = getDayRangeUTC(departureDate);
         if (!outboundRange) {
             return res.status(400).json({ message: 'Invalid departureDate' });
         }
 
-        // 🔹 Outbound flights (always required)
         const outboundFlights = await FlightModel.find({
             origin: origin.toUpperCase(),
             destination: destination.toUpperCase(),
@@ -37,14 +34,12 @@ export const searchFlightsController = async (req: Request, res: Response) => {
             [`availableSeats.${cabinClass}`]: { $gte: totalPassengers }
         });
 
-        // 🔹 One-way → return early
         if (tripType === 'one-way') {
             return res.status(200).json({
                 outboundFlights
             });
         }
 
-        // 🔹 Round-trip → validate returnDate
         if (!returnDate) {
             return res.status(400).json({ message: 'returnDate is required for round-trip' });
         }
@@ -54,7 +49,6 @@ export const searchFlightsController = async (req: Request, res: Response) => {
             return res.status(400).json({ message: 'Invalid returnDate' });
         }
 
-        // 🔹 Return flights (reverse route)
         const returnFlights = await FlightModel.find({
             origin: destination.toUpperCase(),
             destination: origin.toUpperCase(),

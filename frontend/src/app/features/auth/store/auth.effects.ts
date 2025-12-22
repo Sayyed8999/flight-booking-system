@@ -29,7 +29,6 @@ export class AuthEffects {
                     });
                 }
 
-                // No stored auth → do nothing
                 return { type: '[Auth] Noop' };
             })
         )
@@ -43,7 +42,6 @@ export class AuthEffects {
             switchMap(({ email, password }) =>
                 this.authService.login({ email, password }).pipe(
 
-                    // 🔐 Persist auth
                     tap(({ token, user }) => {
                         localStorage.setItem('auth_token', token);
                         localStorage.setItem('auth_user', JSON.stringify(user));
@@ -101,7 +99,6 @@ export class AuthEffects {
                 this.authService.updateProfile({ name }).pipe(
 
                     tap(user => {
-                        // 🔄 Keep localStorage in sync
                         localStorage.setItem('auth_user', JSON.stringify(user));
                     }),
 

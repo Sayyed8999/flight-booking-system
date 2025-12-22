@@ -47,7 +47,6 @@ export class LoginDialog implements OnDestroy {
         }
       });
 
-    // 👇 NEW: Handle "password not set"
     this.store.select(state => state.auth)
       .pipe(
         takeUntil(this.destroy$),

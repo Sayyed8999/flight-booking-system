@@ -19,24 +19,32 @@
     } @else {
 
     @for (b of bookings; track b.id) {
-    <mat-card class="booking-card">
+    <mat-card class="booking-card" appearance="outlined">
 
-        <div class="row">
-            <strong>{{ b.flight.airline }}</strong>
-            <span>{{ b.bookingRef }}</span>
+        <div class="card-header">
+            <div class="airline">
+                {{ b.flight.airline }}
+            </div>
+
+            <div class="ref">
+                {{ b.bookingRef }}
+            </div>
         </div>
 
-        <div class="row">
-            {{ b.flight.origin }} → {{ b.flight.destination }}
+        <div class="route">
+            <span class="city">{{ b.flight.origin }}</span>
+            <span class="arrow">→</span>
+            <span class="city">{{ b.flight.destination }}</span>
         </div>
 
-        <div class="row">
-            {{ b.flight.departureTime | date:'short' }}
-        </div>
+        <div class="meta">
+            <span class="date">
+                {{ b.flight.departureTime | date:'medium' }}
+            </span>
 
-        <div class="row status">
-            Status:
-            <span class="confirmed">{{ b.status }}</span>
+            <span class="status confirmed">
+                {{ b.status }}
+            </span>
         </div>
 
     </mat-card>

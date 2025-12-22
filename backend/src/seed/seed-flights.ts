@@ -7,34 +7,19 @@ export const seedFlights = async () => {
 
     const today = new Date();
 
-    // =========================
-    // OUTBOUND: DEL → BOM (23 Dec)
-    // =========================
-
-    // Morning flight
-    const delBomDep1 = addDays(today, 1, 9, 0);     // Dec 23, 09:00
+    const delBomDep1 = addDays(today, 1, 9, 0);
     const delBomArr1 = addMinutes(delBomDep1, 130);
 
-    // Afternoon flight
-    const delBomDep2 = addDays(today, 1, 13, 30);   // Dec 23, 13:30
+    const delBomDep2 = addDays(today, 1, 13, 30);
     const delBomArr2 = addMinutes(delBomDep2, 125);
 
-    // =========================
-    // RETURN: BOM → DEL (24 Dec)
-    // =========================
-
-    const bomDelDep1 = addDays(today, 2, 10, 0);    // Dec 24, 10:00
+    const bomDelDep1 = addDays(today, 2, 10, 0);
     const bomDelArr1 = addMinutes(bomDelDep1, 135);
 
-    // =========================
-    // RETURN: BOM → DEL (25 Dec)
-    // =========================
-
-    const bomDelDep2 = addDays(today, 3, 18, 0);    // Dec 25, 18:00
+    const bomDelDep2 = addDays(today, 3, 18, 0);
     const bomDelArr2 = addMinutes(bomDelDep2, 140);
 
     await FlightModel.insertMany([
-        // 🔹 DEL → BOM (Dec 23)
         {
             flightNumber: 'AI-203',
             airline: 'Air India',
@@ -67,8 +52,6 @@ export const seedFlights = async () => {
                 first: 2
             }
         },
-
-        // 🔹 BOM → DEL (Dec 24)
         {
             flightNumber: 'AI-204',
             airline: 'Air India',
@@ -85,8 +68,6 @@ export const seedFlights = async () => {
                 first: 1
             }
         },
-
-        // 🔹 BOM → DEL (Dec 25)
         {
             flightNumber: '6E-513',
             airline: 'IndiGo',

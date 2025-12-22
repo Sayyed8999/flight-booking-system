@@ -27,14 +27,12 @@
     font-weight: 500;
 }
 
-/* Contact */
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
     gap: 1rem;
 }
 
-/* Passenger card */
 .passenger-card {
     background: #fff;
     border-radius: 0.75rem;
@@ -45,7 +43,6 @@
     gap: 1.25rem;
 }
 
-/* Header */
 .passenger-header {
     display: flex;
     justify-content: space-between;
@@ -53,14 +50,12 @@
     font-weight: 500;
 }
 
-/* Identity */
 .identity-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 1rem;
 }
 
-/* Gender */
 .gender-group {
     display: flex;
     flex-direction: column;
@@ -72,13 +67,11 @@
     opacity: 0.8;
 }
 
-/* Actions */
 .actions {
     display: flex;
     justify-content: flex-end;
 }
 
-/* Mobile */
 @media (max-width: 600px) {
     .identity-grid {
         grid-template-columns: 1fr;

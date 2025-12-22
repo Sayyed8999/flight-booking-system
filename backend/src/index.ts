@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-import app from './app';        // ✅ USE THE REAL APP
+import app from './app';
 import { connectDB } from './config/db';
 import { seedFlights } from './seed/seed-flights';
 

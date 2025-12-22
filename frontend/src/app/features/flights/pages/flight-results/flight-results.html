@@ -9,7 +9,6 @@
 
     @if (results$ | async; as results) {
 
-    <!-- 🚀 OUTBOUND FLIGHTS -->
     @if (!results.outboundFlights.length) {
     <div class="flex-center mt-100">
         No flights found
@@ -50,7 +49,6 @@
     </mat-card>
     }
 
-    <!-- 🔁 RETURN FLIGHTS (ROUND-TRIP ONLY) -->
     @if (results.returnFlights?.length) {
 
     <h2 class="section-title mt-40">Return Flights</h2>
