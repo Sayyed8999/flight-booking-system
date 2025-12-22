@@ -7,11 +7,11 @@
                 <app-select-list formControlName="tripType" label="Trip Type"
                     [options]="tripTypeOptionList"></app-select-list>
 
-                <app-form-input formControlName="from" label="From" placeholder="City or Airport">
-                </app-form-input>
+                <app-searchable-select-list formControlName="from" label="From" [data]="airportsData">
+                </app-searchable-select-list>
 
-                <app-form-input formControlName="to" label="To" placeholder="City or Airport">
-                </app-form-input>
+                <app-searchable-select-list formControlName="to" label="To" [data]="airportsData">
+                </app-searchable-select-list>
 
                 <app-date-input formControlName="departureDate" label="Departure" [min]="today">
                 </app-date-input>

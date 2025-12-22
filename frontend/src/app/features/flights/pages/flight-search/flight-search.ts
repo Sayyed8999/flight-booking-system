@@ -16,7 +16,8 @@ import { Router } from '@angular/router';
 import { FlightService } from '../../services/flights.service';
 import { TripType } from '../../../../shared/utilities/enums/trip-type.enum';
 import { AppRoutes } from '../../../../shared/utilities/enums/app-routes.enum';
-
+import { SearchableSelectList } from '../../../../shared/components/searchable-select-list/searchable-select-list';
+import { INDIAN_AIRPORTS } from '../../../../shared/data/indian-airports';
 @Component({
   selector: 'app-flight-search',
   standalone: true,
@@ -32,7 +33,8 @@ import { AppRoutes } from '../../../../shared/utilities/enums/app-routes.enum';
     SelectListComponent,
     FormInputComponent,
     DateInputComponent,
-    NumberInputComponent
+    NumberInputComponent,
+    SearchableSelectList
   ],
   templateUrl: './flight-search.html',
   styleUrl: './flight-search.scss'
@@ -41,6 +43,7 @@ export class FlightSearch {
   public searchForm: FormGroup;
   public cabinClassOptionList = cabinClassOptionList
   public tripTypeOptionList = tripTypeOptionList
+  public airportsData = INDIAN_AIRPORTS
 
   public today = new Date();
   public minReturnDate?: Date = this.today;

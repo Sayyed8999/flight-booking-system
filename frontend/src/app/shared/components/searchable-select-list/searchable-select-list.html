@@ -1,0 +1,17 @@
+<mat-form-field appearance="outline" class="full-width">
+    <mat-label>{{ label }}</mat-label>
+
+    <input type="text" matInput [formControl]="control" [matAutocomplete]="auto" (blur)="onTouched()" />
+
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+        @for (item of filteredData; track item.value) {
+        <mat-option [value]="item.value" (onSelectionChange)="selectItem(item)">
+            <div class="option">
+                <strong>{{ item.label }}</strong>
+                <span class="code">({{ item.value }})</span>
+                <div class="name">{{ item.name }}</div>
+            </div>
+        </mat-option>
+        }
+    </mat-autocomplete>
+</mat-form-field>
