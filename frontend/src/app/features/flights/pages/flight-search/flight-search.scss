@@ -1,0 +1,46 @@
+.flight-search {
+    padding-block: 1.5rem;
+}
+
+.search-card {
+    max-width: 100%;
+    padding: 1rem;
+}
+
+.search-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+}
+
+.passenger-group {
+    display: grid;
+    gap: 1rem;
+    grid-column: 1 / -1;
+
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+    .passenger-group {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 640px) {
+    .search-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .search-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.actions {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+}

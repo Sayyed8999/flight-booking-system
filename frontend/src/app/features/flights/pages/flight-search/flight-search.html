@@ -1,0 +1,47 @@
+<section class="flight-search">
+    <mat-card class="search-card">
+        <h2 class="heading-lg">Search Flights</h2>
+
+        <form [formGroup]="searchForm">
+            <div class="search-grid">
+                <app-select-list formControlName="tripType" label="Trip Type"
+                    [options]="tripTypeOptionList"></app-select-list>
+
+                <app-form-input formControlName="from" label="From" placeholder="City or Airport">
+                </app-form-input>
+
+                <app-form-input formControlName="to" label="To" placeholder="City or Airport">
+                </app-form-input>
+
+                <app-date-input formControlName="departureDate" label="Departure" [min]="today">
+                </app-date-input>
+
+                <app-date-input formControlName="returnDate" label="Return" [min]="minReturnDate">
+                </app-date-input>
+
+                <div class="passenger-group" formGroupName="passengers">
+
+                    <app-number-input formControlName="adults" label="Adults" [min]="1">
+                    </app-number-input>
+
+                    <app-number-input formControlName="children" label="Children" [min]="0">
+                    </app-number-input>
+
+                    <app-number-input formControlName="infants" label="Infants" [min]="0">
+                    </app-number-input>
+
+                </div>
+
+
+                <app-select-list formControlName="cabinClass" label="Class"
+                    [options]="cabinClassOptionList"></app-select-list>
+            </div>
+
+            <div class="actions">
+                <button mat-flat-button color="primary" (click)="submit()">
+                    Search Flights
+                </button>
+            </div>
+        </form>
+    </mat-card>
+</section>

@@ -1,0 +1,28 @@
+<div class="auth-dialog">
+
+    <h2 mat-dialog-title>
+        Login
+    </h2>
+
+    <div class="auth-dialog-panel">
+        <mat-dialog-content>
+            <app-login-form [loading]="(loading$ | async) ?? false">
+            </app-login-form>
+
+            <div class="switch-auth">
+                <span>Don’t have an account?</span>
+                <button mat-button type="button" (click)="openSignup()">
+                    Register
+                </button>
+            </div>
+
+        </mat-dialog-content>
+    </div>
+
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="close()">
+            Cancel
+        </button>
+    </mat-dialog-actions>
+
+</div>

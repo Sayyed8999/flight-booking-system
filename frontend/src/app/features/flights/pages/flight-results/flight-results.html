@@ -1,0 +1,90 @@
+<section class="flight-results">
+
+    @if (loading) {
+    <div class="flex-center mt-100">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+    }
+
+
+    @if (results$ | async; as results) {
+
+    <!-- 🚀 OUTBOUND FLIGHTS -->
+    @if (!results.outboundFlights.length) {
+    <div class="flex-center mt-100">
+        No flights found
+    </div>
+    }
+
+    @if (results.outboundFlights.length) {
+    <h2 class="section-title">Outbound Flights</h2>
+    }
+
+    @for (flight of results.outboundFlights; track flight._id) {
+    <mat-card class="flight-card">
+
+        <div class="flight-header">
+            <strong>{{ flight.airline }}</strong>
+            <span>{{ flight.flightNumber }}</span>
+        </div>
+
+        <div class="flight-body">
+            <div>{{ flight.origin }} → {{ flight.destination }}</div>
+            <div>
+                {{ flight.departureTime | date:'shortTime' }} –
+                {{ flight.arrivalTime | date:'shortTime' }}
+            </div>
+            <div>
+                Duration: {{ flight.durationMinutes | duration }}
+            </div>
+        </div>
+
+        <div class="flight-footer">
+            <strong>₹{{ flight.price }}</strong>
+
+            <button mat-flat-button color="primary" (click)="selectFlight(flight)">
+                Book
+            </button>
+        </div>
+
+    </mat-card>
+    }
+
+    <!-- 🔁 RETURN FLIGHTS (ROUND-TRIP ONLY) -->
+    @if (results.returnFlights?.length) {
+
+    <h2 class="section-title mt-40">Return Flights</h2>
+
+    @for (flight of results.returnFlights; track flight._id) {
+    <mat-card class="flight-card">
+
+        <div class="flight-header">
+            <strong>{{ flight.airline }}</strong>
+            <span>{{ flight.flightNumber }}</span>
+        </div>
+
+        <div class="flight-body">
+            <div>{{ flight.origin }} → {{ flight.destination }}</div>
+            <div>
+                {{ flight.departureTime | date:'shortTime' }} –
+                {{ flight.arrivalTime | date:'shortTime' }}
+            </div>
+            <div>
+                Duration: {{ flight.durationMinutes | duration }}
+            </div>
+        </div>
+
+        <div class="flight-footer">
+            <strong>₹{{ flight.price }}</strong>
+
+            <button mat-flat-button color="primary" (click)="selectFlight(flight)">
+                Book
+            </button>
+        </div>
+
+    </mat-card>
+    }
+    }
+    }
+
+</section>

@@ -1,0 +1,95 @@
+<div class="booking-page">
+
+    <h1 class="page-title">Passenger Information</h1>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+
+        <!-- Contact Details -->
+        <section class="section">
+            <h2 class="section-title">Contact Details</h2>
+
+            <div class="contact-grid">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="contactEmail" placeholder="you@example.com" />
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="contactPhone" placeholder="+91 98765 43210" />
+                </mat-form-field>
+            </div>
+        </section>
+
+        <!-- Passengers -->
+        <section class="section">
+            <h2 class="section-title">Passengers</h2>
+
+            <div formArrayName="passengers">
+
+                @for (passenger of passengers.controls; track i; let i = $index) {
+                <div class="passenger-card" [formGroupName]="i">
+
+                    <!-- Card header -->
+                    <div class="passenger-header">
+                        <span>Passenger {{ i + 1 }}</span>
+
+                        @if (passengers.length > 1) {
+                        <button mat-icon-button color="warn" type="button" (click)="removePassenger(i)">
+                            ✕
+                        </button>
+                        }
+                    </div>
+
+                    <!-- Identity -->
+                    <div class="identity-grid">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Full Name</mat-label>
+                            <input matInput formControlName="name" />
+                        </mat-form-field>
+
+                        <mat-form-field appearance="outline">
+                            <mat-label>Age</mat-label>
+                            <input matInput type="number" formControlName="age" />
+                        </mat-form-field>
+                    </div>
+
+                    <!-- Gender -->
+                    <div class="gender-group">
+                        <label class="group-label">Gender</label>
+                        <mat-radio-group formControlName="gender">
+                            <mat-radio-button value="M">Male</mat-radio-button>
+                            <mat-radio-button value="F">Female</mat-radio-button>
+                            <mat-radio-button value="O">Other</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+
+                    <!-- Seat preference -->
+                    <mat-form-field appearance="outline">
+                        <mat-label>Seat Preference</mat-label>
+                        <mat-select formControlName="seatPreference">
+                            <mat-option value="NONE">No preference</mat-option>
+                            <mat-option value="WINDOW">Window</mat-option>
+                            <mat-option value="AISLE">Aisle</mat-option>
+                            <mat-option value="MIDDLE">Middle</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+                }
+
+            </div>
+        </section>
+
+        <button mat-stroked-button type="button" (click)="addPassenger()">
+            + Add Passenger
+        </button>
+
+        <div class="actions">
+            <button mat-flat-button color="primary" type="submit">
+                Continue to Confirmation
+            </button>
+        </div>
+
+    </form>
+</div>

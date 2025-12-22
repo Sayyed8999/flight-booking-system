@@ -1,0 +1,18 @@
+.flight-results {
+    display: grid;
+    gap: 1rem;
+}
+
+.flight-card {
+    padding: 1rem;
+}
+
+.flight-header,
+.flight-footer {
+    display: flex;
+    justify-content: space-between;
+
+    strong {
+        font-size: 17px;
+    }
+}

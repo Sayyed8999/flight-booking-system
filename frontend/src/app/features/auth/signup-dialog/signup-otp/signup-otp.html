@@ -1,0 +1,17 @@
+<h2 class="dialog-title">Verify OTP</h2>
+
+<p class="subtitle">
+    Enter the 6-digit OTP sent to<br />
+    <strong>{{ email }}</strong>
+</p>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+
+    <app-form-input label="OTP" formControlName="otp" placeholder="Enter a valid 6-digit OTP">
+    </app-form-input>
+
+    <app-action-button type="submit" color="primary" [panelClass]="'mt-10'" [loading]="loading" mainText="Verify OTP"
+        loadingText="Verifying…">
+    </app-action-button>
+
+</form>

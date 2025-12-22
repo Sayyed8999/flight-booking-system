@@ -1,0 +1,90 @@
+.booking-page {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+.page-title {
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Contact */
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 1rem;
+}
+
+/* Passenger card */
+.passenger-card {
+    background: #fff;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Header */
+.passenger-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+/* Identity */
+.identity-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+}
+
+/* Gender */
+.gender-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.group-label {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Actions */
+.actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+    .identity-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        justify-content: center;
+    }
+}

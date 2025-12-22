@@ -1,0 +1,59 @@
+.success-page {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: clamp(1rem, 3vw, 2rem);
+}
+
+.ticket-card {
+    padding: 1.5rem;
+}
+
+.ticket-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.success-icon {
+    font-size: 3rem;
+    color: #2e7d32;
+}
+
+.ref {
+    margin-top: 0.5rem;
+    opacity: 0.8;
+}
+
+.section {
+    margin-top: 1.25rem;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin: 0.25rem 0;
+}
+
+.passenger {
+    font-size: 0.95rem;
+}
+
+.status {
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+.confirmed {
+    color: #2e7d32;
+    margin-left: 0.5rem;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.empty-state {
+    text-align: center;
+    margin-top: 4rem;
+}

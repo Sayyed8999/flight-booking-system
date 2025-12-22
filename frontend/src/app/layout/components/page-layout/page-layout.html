@@ -1,0 +1,48 @@
+<div class="page">
+
+    <app-header (menuToggle)="toggleSidenav()" [isLoggedIn]="(isLoggedIn$ | async) ?? false"
+        (isAuthenticated)="handleLogoutClick($event)"></app-header>
+
+    <mat-sidenav-container>
+
+        <mat-sidenav #sidenav mode="over" position="start">
+            <div class="sidenav-content">
+
+                <mat-nav-list>
+                    <a mat-list-item routerLink="/flights" (click)="closeSidenav()">
+                        Flights
+                    </a>
+                    @if ((isLoggedIn$ | async) ?? false) {
+                    <a mat-list-item routerLink="/profile" (click)="closeSidenav()">
+                        Profile
+                    </a>
+
+                    <a mat-list-item routerLink="/bookings" (click)="closeSidenav()">
+                        My Bookings
+                    </a>
+                    }
+
+                </mat-nav-list>
+
+                @if ((isLoggedIn$ | async) ?? false) {
+                <div class="sidenav-footer">
+                    <button mat-list-item class="button-sm" (click)="handleLogoutClick(false)">Logout</button>
+                </div>
+                }
+
+            </div>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <main class="main-content">
+                <div class="container">
+                    <router-outlet></router-outlet>
+                </div>
+            </main>
+        </mat-sidenav-content>
+
+    </mat-sidenav-container>
+
+    <app-footer></app-footer>
+
+</div>

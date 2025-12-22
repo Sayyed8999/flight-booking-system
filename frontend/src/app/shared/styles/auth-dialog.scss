@@ -1,0 +1,12 @@
+.auth-dialog-panel {
+    .mat-mdc-dialog-container {
+        padding: 0;
+        overflow: visible;
+    }
+
+    .mat-mdc-dialog-content {
+        max-height: none;
+        overflow: visible;
+        padding: 0;
+    }
+}

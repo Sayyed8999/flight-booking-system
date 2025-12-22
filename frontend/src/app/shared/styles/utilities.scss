@@ -1,0 +1,45 @@
+.flex {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gap-sm {
+    gap: 0.5rem;
+}
+
+.gap-md {
+    gap: 1rem;
+}
+
+.mt-100 {
+    margin-top: 100px
+}
+
+.mt-10 {
+    margin-top: 10px !important;
+}
+
+.ml-1 {
+    margin-left: 10px
+}
+
+.full-width {
+    width: 100%;
+}
+
+.hide-mobile {
+    @media (max-width: 768px) {
+        display: none !important;
+    }
+}

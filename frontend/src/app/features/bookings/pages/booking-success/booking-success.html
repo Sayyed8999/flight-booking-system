@@ -1,0 +1,75 @@
+<div class="success-page">
+
+    @if (booking$ | async; as booking) {
+
+    @if (!booking) {
+    <div class="empty-state">
+        <p>No booking found.</p>
+        <button mat-flat-button color="primary" (click)="bookAnother()">
+            Go to Flights
+        </button>
+    </div>
+    } @else {
+
+    <mat-card class="ticket-card">
+
+        <!-- Header -->
+        <div class="ticket-header">
+            <mat-icon class="success-icon">check_circle</mat-icon>
+            <h1>Booking Confirmed</h1>
+            <p class="ref">Booking Ref: <strong>{{ booking.bookingRef }}</strong></p>
+        </div>
+
+        <!-- Flight -->
+        <div class="section">
+            <h3>Flight Details</h3>
+            <div class="row">
+                <strong>{{ booking.flight.airline }}</strong>
+                <span>{{ booking.flight.flightNumber }}</span>
+            </div>
+            <div class="row">
+                {{ booking.flight.origin }} → {{ booking.flight.destination }}
+            </div>
+            <div class="row">
+                {{ booking.flight.departureTime | date:'shortTime' }} –
+                {{ booking.flight.arrivalTime | date:'shortTime' }}
+            </div>
+        </div>
+
+        <!-- Passengers -->
+        <div class="section">
+            <h3>Passengers</h3>
+
+            @for (p of booking.passengers; track i; let i = $index) {
+            <div class="row passenger">
+                <span>{{ p.name }} ({{ p.age }})</span>
+                <span>
+                    Seat:
+                    {{ p.seatNumber ?? (p.seatPreference === 'NONE' ? 'Auto' : p.seatPreference) }}
+                </span>
+            </div>
+            }
+        </div>
+
+        <!-- Status -->
+        <div class="status">
+            Status:
+            <span class="confirmed">{{ booking.status }}</span>
+        </div>
+
+        <!-- Actions -->
+        <div class="actions">
+            <button mat-stroked-button (click)="bookAnother()">
+                Book Another Flight
+            </button>
+
+            <button mat-flat-button color="primary" (click)="goToBookings()">
+                My Bookings
+            </button>
+        </div>
+
+    </mat-card>
+    }
+    }
+
+</div>

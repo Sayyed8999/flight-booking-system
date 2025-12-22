@@ -1,0 +1,41 @@
+<div class="auth-dialog">
+    <h2 mat-dialog-title class="dialog-title">
+        <button mat-icon-button *ngIf="canGoBack" (click)="goBack()" aria-label="Go back">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <span>Create Account</span>
+    </h2>
+
+
+    <div class="auth-dialog-panel">
+        <mat-dialog-content>
+
+            <!-- REGISTER STEP -->
+            <ng-container *ngIf="currentStep === SignupStep.REGISTER">
+                <app-signup-register [loading]="loading" (registered)="handleRegistered($event)">
+                </app-signup-register>
+            </ng-container>
+
+            <!-- VERIFY OTP STEP -->
+            <ng-container *ngIf="currentStep === SignupStep.VERIFY_OTP">
+                <app-signup-otp [email]="email" [loading]="loading"
+                    (verified)="setCurrentStep(SignupStep.SET_PASSWORD)">
+                </app-signup-otp>
+            </ng-container>
+
+            <!-- SET PASSWORD STEP -->
+            <ng-container *ngIf="currentStep === SignupStep.SET_PASSWORD">
+                <app-signup-set-password [email]="email" [loading]="loading" (signupComplete)="closeDialog()">
+                </app-signup-set-password>
+            </ng-container>
+
+        </mat-dialog-content>
+    </div>
+
+    <mat-dialog-actions align="end">
+        <button mat-button (click)="closeDialog()">
+            Cancel
+        </button>
+    </mat-dialog-actions>
+</div>

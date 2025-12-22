@@ -1,0 +1,17 @@
+<div class="form-wrapper">
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <app-form-input label="Full Name" formControlName="name" placeholder="Your name">
+        </app-form-input>
+
+        <app-form-input label="Email" [type]="'email'" formControlName="email" placeholder="you@example.com">
+        </app-form-input>
+
+        <app-action-button type="submit" color="primary" [loading]="loading" mainText="Send OTP"
+            loadingText="Sending OTP">
+        </app-action-button>
+
+    </form>
+
+</div>

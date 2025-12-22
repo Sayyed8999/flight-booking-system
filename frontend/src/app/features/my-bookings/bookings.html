@@ -1,0 +1,49 @@
+<div class="bookings-page">
+
+    <h1 class="page-title">My Bookings</h1>
+
+    @if (loading$ | async) {
+    <div class="center">
+        <mat-spinner diameter="40"></mat-spinner>
+    </div>
+    }
+
+    @if (!(loading$ | async)) {
+
+    @if (bookings$ | async; as bookings) {
+
+    @if (!bookings.length) {
+    <p class="empty">
+        You don’t have any bookings yet.
+    </p>
+    } @else {
+
+    @for (b of bookings; track b.id) {
+    <mat-card class="booking-card">
+
+        <div class="row">
+            <strong>{{ b.flight.airline }}</strong>
+            <span>{{ b.bookingRef }}</span>
+        </div>
+
+        <div class="row">
+            {{ b.flight.origin }} → {{ b.flight.destination }}
+        </div>
+
+        <div class="row">
+            {{ b.flight.departureTime | date:'short' }}
+        </div>
+
+        <div class="row status">
+            Status:
+            <span class="confirmed">{{ b.status }}</span>
+        </div>
+
+    </mat-card>
+    }
+
+    }
+    }
+    }
+
+</div>

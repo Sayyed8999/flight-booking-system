@@ -1,0 +1,16 @@
+<button mat-flat-button [color]="color" [type]="type" class="action-btn full-width {{panelClass}}"
+    [disabled]="disabled || loading" (click)="onClick()">
+
+    <span class="btn-label flex">
+        <span class="btn-text main-content">
+            {{ loading ? loadingText : mainText }}
+        </span>
+
+        @if (loading) {
+        <span class="spinner-wrap">
+            <mat-spinner diameter="16" strokeWidth="3"></mat-spinner>
+        </span>
+        }
+    </span>
+
+</button>

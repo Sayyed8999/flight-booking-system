@@ -1,0 +1,13 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
+
+    <app-form-input label="Email" type="email" placeholder="you@example.com" formControlName="email">
+    </app-form-input>
+
+    <app-form-input label="Password" type="password" placeholder="Enter your password" formControlName="password">
+    </app-form-input>
+
+    <app-action-button type="submit" color="primary" [panelClass]="'mt-10'" [loading]="loading" mainText="Login"
+        loadingText="Logging in...">
+    </app-action-button>
+
+</form>

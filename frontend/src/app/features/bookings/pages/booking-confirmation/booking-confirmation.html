@@ -1,0 +1,72 @@
+<div class="confirmation-page">
+
+    <h1 class="page-title">Confirm Your Booking</h1>
+
+    @if (vm$ | async; as vm) {
+
+    @if (!vm.flight || !vm.passengerDetails.passengers.length) {
+    <div class="empty-state">
+        <p>Booking information is missing.</p>
+        <button mat-flat-button color="primary" (click)="goBack()">
+            Go Back
+        </button>
+    </div>
+    } @else {
+
+    <!-- Flight Summary -->
+    <mat-card class="summary-card">
+        <h2>Flight Details</h2>
+
+        <div class="summary-row">
+            <strong>{{ vm.flight.airline }}</strong>
+            <span>{{ vm.flight.flightNumber }}</span>
+        </div>
+
+        <div class="summary-row">
+            {{ vm.flight.origin }} → {{ vm.flight.destination }}
+        </div>
+
+        <div class="summary-row">
+            {{ vm.flight.departureTime | date:'shortTime' }} –
+            {{ vm.flight.arrivalTime | date:'shortTime' }}
+        </div>
+
+        <div class="price">
+            ₹{{ vm.flight.price }}
+        </div>
+    </mat-card>
+
+    <!-- Passenger Summary -->
+    <mat-card class="summary-card">
+        <h2>Passengers</h2>
+
+        @for (p of vm.passengerDetails.passengers; track i; let i = $index) {
+        <div class="passenger-row">
+            <span>{{ p.name }} ({{ p.age }})</span>
+            <span>{{ p.gender }}</span>
+            <span class="seat">
+                Seat: {{ p.seatPreference === 'NONE' ? 'Auto' : p.seatPreference }}
+            </span>
+        </div>
+        }
+    </mat-card>
+
+    <!-- Contact -->
+    <mat-card class="summary-card">
+        <h2>Contact</h2>
+        <div>{{ vm.passengerDetails.contactEmail }}</div>
+        <div>{{ vm.passengerDetails.contactPhone }}</div>
+    </mat-card>
+
+    <!-- Actions -->
+    <div class="actions">
+        <button mat-stroked-button (click)="goBack()">Back</button>
+        <button mat-flat-button color="primary" (click)="confirmBooking()">
+            Confirm Booking
+        </button>
+    </div>
+
+    }
+    }
+
+</div>

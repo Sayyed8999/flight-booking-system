@@ -1,0 +1,51 @@
+:host {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 1000; // above content & cards
+}
+
+
+mat-toolbar {
+    padding-inline: 0;
+}
+
+.header-inner {
+    width: 100%;
+    padding-inline: 1rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-desktop {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.nav-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .nav-desktop {
+        display: none;
+    }
+
+    .nav-mobile {
+        display: inline-flex;
+    }
+}
