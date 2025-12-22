@@ -13,6 +13,8 @@ import { FormInputComponent } from '../../shared/components/form-input/form-inpu
 
 import * as AuthActions from '../auth/store/auth.actions'
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-profile',
@@ -23,7 +25,8 @@ import { Observable } from 'rxjs';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    FormInputComponent
+    FormInputComponent,
+    MatIconModule
   ],
   templateUrl: './profile.html',
   styleUrl: './profile.scss'
@@ -37,7 +40,8 @@ export class Profile implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store
+    private store: Store,
+    private router: Router
   ) {
     this.loading$ = this.store.select(selectAuthLoading)
   }
@@ -61,6 +65,11 @@ export class Profile implements OnInit {
       });
     });
   }
+
+  public navigateToFlights(): void {
+    this.router.navigate(['/flights']);
+  }
+
 
   public submit(): void {
     if (this.form.invalid) {

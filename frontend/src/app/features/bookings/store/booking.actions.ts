@@ -51,6 +51,11 @@ export const loadBookingByIdSuccess = createAction(
     props<{ booking: Booking }>()
 );
 
+export const loadBookingByIdFailure = createAction(
+    '[Booking] Load Booking By Id Failure',
+    props<{ error: string }>()
+);
+
 export const cancelBooking = createAction(
     '[Booking] Cancel Booking',
     props<{ bookingId: string }>()
@@ -59,6 +64,11 @@ export const cancelBooking = createAction(
 export const cancelBookingSuccess = createAction(
     '[Booking] Cancel Booking Success',
     props<{ bookingId: string }>()
+);
+
+export const cancelBookingFailure = createAction(
+    '[Booking] Cancel Booking Failure',
+    props<{ error: string }>()
 );
 
 

@@ -37,3 +37,52 @@ export const updateProfileFailure = createAction(
     props<{ error: string }>()
 );
 
+export const register = createAction(
+    '[Auth] Register',
+    props<{ name: string; email: string }>()
+);
+
+export const registerSuccess = createAction(
+    '[Auth] Register Success',
+    props<{ email: string }>()
+);
+
+export const registerFailure = createAction(
+    '[Auth] Register Failure',
+    props<{ error: string }>()
+);
+
+export const verifySignupOtp = createAction(
+    '[Auth] Verify Signup OTP',
+    props<{ email: string; otp: string }>()
+);
+
+export const verifySignupOtpSuccess = createAction(
+    '[Auth] Verify Signup OTP Success'
+);
+
+export const verifySignupOtpFailure = createAction(
+    '[Auth] Verify Signup OTP Failure',
+    props<{ error: string }>()
+);
+
+export const setPassword = createAction(
+    '[Auth] Set Password',
+    props<{
+        email: string;
+        password: string;
+        confirmPassword: string;
+    }>()
+);
+
+export const setPasswordSuccess = createAction(
+    '[Auth] Set Password Success'
+);
+
+export const setPasswordFailure = createAction(
+    '[Auth] Set Password Failure',
+    props<{ error: string }>()
+);
+
+
+

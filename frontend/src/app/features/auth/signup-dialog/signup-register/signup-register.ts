@@ -4,9 +4,9 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatButtonModule } from '@angular/material/button';
 
 import { FormInputComponent } from '../../../../shared/components/form-input/form-input';
-import { AuthService } from '../../auth.service';
 import { ActionButton } from '../../../../shared/components/action-button/action-button';
-import { NotificationService } from '../../../../shared/services/notification.service';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../../store/auth.actions'
 
 @Component({
   selector: 'app-signup-register',
@@ -22,15 +22,13 @@ import { NotificationService } from '../../../../shared/services/notification.se
   styleUrl: './signup-register.scss'
 })
 export class SignupRegister {
-  @Input() loading = false;
-  @Output() registered = new EventEmitter<string>();
+  @Input() loading: boolean | null = false;
 
   public form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private notify: NotificationService
+    private store: Store,
   ) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -49,15 +47,8 @@ export class SignupRegister {
     this.loading = true;
     const { name, email } = this.form.getRawValue();
 
-    this.authService.register({ name, email }).subscribe({
-      next: () => {
-        this.loading = false;
-        this.registered.emit(email);
-      },
-      error: (err: any) => {
-        this.loading = false;
-        this.notify.error(err, 'Failed to send OTP');
-      }
-    });
+    this.store.dispatch(
+      AuthActions.register({ name, email })
+    );
   }
 }

@@ -7,10 +7,14 @@ import { SignupRegister } from './signup-register/signup-register';
 import { SignupOtp } from './signup-otp/signup-otp';
 import { SignupSetPassword } from './signup-set-password/signup-set-password';
 import { MatIconModule } from '@angular/material/icon';
-import { SignupStep } from '../auth.types';
+import { SignupStep } from '../models/auth.types';
 
 import * as AuthActions from '../store/auth.actions';
 import { Store } from '@ngrx/store';
+import { Actions, ofType } from '@ngrx/effects';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
+import { selectAuthLoading } from '../store/auth.selectors';
 
 @Component({
   selector: 'app-signup-dialog',
@@ -34,13 +38,16 @@ export class SignupDialog {
   public email: string | null = null;
   public redirectedFromLogin = false;
 
-  public loading = false;
-  public error: string | null = null;
+  public loading$!: Observable<boolean>;
 
-  constructor(private store: Store, private dialogRef: MatDialogRef<SignupDialog>, @Inject(MAT_DIALOG_DATA) public data?: {
-    email?: string;
-    startStep?: SignupStep;
-  }) {
+  constructor(
+    private store: Store,
+    private actions$: Actions,
+    private dialogRef: MatDialogRef<SignupDialog>,
+    @Inject(MAT_DIALOG_DATA) public data?: {
+      email?: string;
+      startStep?: SignupStep;
+    }) {
     if (data?.email) {
       this.email = data.email;
     }
@@ -48,11 +55,42 @@ export class SignupDialog {
       this.currentStep = data.startStep;
       this.redirectedFromLogin = true
     }
+    this.bindAuthFlow();
+
   }
 
-  public handleRegistered(email: string): void {
-    this.email = email;
-    this.setCurrentStep(SignupStep.VERIFY_OTP)
+  public ngOnInit(): void {
+    this.loading$ = this.store.select(selectAuthLoading);
+  }
+
+  private bindAuthFlow(): void {
+    this.actions$
+      .pipe(
+        ofType(
+          AuthActions.registerSuccess,
+          AuthActions.verifySignupOtpSuccess,
+          AuthActions.setPasswordSuccess
+        ),
+        takeUntilDestroyed()
+      )
+      .subscribe(action => {
+
+        switch (action.type) {
+
+          case AuthActions.registerSuccess.type:
+            this.email = action.email;
+            this.currentStep = SignupStep.VERIFY_OTP;
+            break;
+
+          case AuthActions.verifySignupOtpSuccess.type:
+            this.currentStep = SignupStep.SET_PASSWORD;
+            break;
+
+          case AuthActions.setPasswordSuccess.type:
+            this.dialogRef.close(true);
+            break;
+        }
+      });
   }
 
   public setCurrentStep(step: SignupStep): void {

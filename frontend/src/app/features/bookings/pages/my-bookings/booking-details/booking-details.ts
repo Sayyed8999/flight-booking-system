@@ -5,9 +5,9 @@ import { Store } from '@ngrx/store';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { selectSelectedBooking } from '../../bookings/store/booking.selectors';
-import * as BookingActions from '../../bookings/store/booking.actions';
-import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog';
+import * as BookingActions from '../../../store/booking.actions';
+import { selectSelectedBooking } from '../../../store/booking.selectors';
+import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog';
 
 @Component({
   standalone: true,

@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './action-button.scss'
 })
 export class ActionButton {
-  @Input() loading = false;
+  @Input() loading: boolean | null = false;
   @Input() mainText = 'Submit';
   @Input() loadingText = 'Loading...';
   @Input() disabled = false;

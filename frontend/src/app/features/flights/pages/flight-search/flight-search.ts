@@ -9,13 +9,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SelectListComponent } from '../../../../shared/components/select-list/select-list';
 import { cabinClassOptionList, tripTypeOptionList } from '../../../../shared/data/option-list-data';
-import { FormInputComponent } from '../../../../shared/components/form-input/form-input';
 import { DateInputComponent } from '../../../../shared/components/date-input/date-input';
 import { NumberInputComponent } from '../../../../shared/components/number-input/number-input';
 import { Router } from '@angular/router';
 import { FlightService } from '../../services/flights.service';
 import { TripType } from '../../../../shared/utilities/enums/trip-type.enum';
-import { AppRoutes } from '../../../../shared/utilities/enums/app-routes.enum';
 import { SearchableSelectList } from '../../../../shared/components/searchable-select-list/searchable-select-list';
 import { INDIAN_AIRPORTS } from '../../../../shared/data/indian-airports';
 @Component({

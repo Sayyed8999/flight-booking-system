@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { AuthApiEndpoint, AuthUser, LoginResponse } from './auth.types';
-import { environment } from '../../../environments/environment';
+import { AuthApiEndpoint, AuthUser, LoginResponse } from '../models/auth.types';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {

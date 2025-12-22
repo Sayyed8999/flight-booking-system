@@ -13,3 +13,16 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+
+    .page-title {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 600;
+    }
+}

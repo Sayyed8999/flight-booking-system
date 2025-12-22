@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { PageLayout } from './layout/components/page-layout/page-layout';
-import { authGuard } from './features/auth/auth.guard';
+import { authGuard } from './features/auth/guards/auth.guard';
 import { unsavedPassengersGuard } from './features/bookings/guards/unsaved-passengers.guard';
 
 export const routes: Routes = [
@@ -23,7 +23,7 @@ export const routes: Routes = [
             {
                 path: 'bookings',
                 loadComponent: () =>
-                    import('./features/my-bookings/bookings').then(m => m.Bookings),
+                    import('./features/bookings/pages/my-bookings/bookings').then(m => m.Bookings),
                 canActivate: [authGuard]
             },
             {
@@ -52,7 +52,7 @@ export const routes: Routes = [
                 path: 'bookings/:id',
                 canActivate: [authGuard],
                 loadComponent: () =>
-                    import('./features/my-bookings/booking-details/booking-details')
+                    import('./features/bookings/pages/my-bookings/booking-details/booking-details')
                         .then(m => m.BookingDetails)
             },
             {

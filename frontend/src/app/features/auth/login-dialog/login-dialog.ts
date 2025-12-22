@@ -8,14 +8,11 @@ import { Subject, takeUntil } from 'rxjs';
 import { SignupDialog } from '../signup-dialog/signup-dialog';
 import {
   selectAuthLoading,
-  selectAuthError,
   selectAuthUser
 } from '../store/auth.selectors';
 import { LoginForm } from './login-form/login-form';
-
 import { filter } from 'rxjs';
-import * as AuthActions from '../store/auth.actions';
-import { SignupStep } from '../auth.types';
+import { SignupStep } from '../models/auth.types';
 
 @Component({
   selector: 'app-login-dialog',

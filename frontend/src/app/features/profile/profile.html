@@ -1,6 +1,12 @@
 <div class="profile-page">
 
-    <h1>My Profile</h1>
+    <div class="profile-header">
+        <button mat-icon-button (click)="navigateToFlights()" aria-label="Back to search">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <h1 class="page-title">My Profile</h1>
+    </div>
 
     <form [formGroup]="form" (ngSubmit)="submit()" class="profile-form">
 

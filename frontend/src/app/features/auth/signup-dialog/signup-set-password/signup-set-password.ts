@@ -4,9 +4,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { FormInputComponent } from '../../../../shared/components/form-input/form-input';
 import { ActionButton } from '../../../../shared/components/action-button/action-button';
-import { NotificationService } from '../../../../shared/services/notification.service';
-import { AuthService } from '../../auth.service';
 import { passwordMatchValidator } from '../../../../shared/validators/password-match.validator';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../../store/auth.actions'
 
 @Component({
   selector: 'app-signup-set-password',
@@ -22,18 +22,14 @@ import { passwordMatchValidator } from '../../../../shared/validators/password-m
   styleUrl: './signup-set-password.scss'
 })
 export class SignupSetPassword {
-
   @Input() email: string | null = null;
-  @Input() loading = false;
-
-  @Output() signupComplete = new EventEmitter<boolean>();
+  @Input() loading: boolean | null = false;
 
   public form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private notify: NotificationService
+    private store: Store
   ) {
     this.form = this.fb.group(
       {
@@ -55,23 +51,15 @@ export class SignupSetPassword {
     }
 
     const { password, confirmPassword } = this.form.value;
+    const email = this.email as string;
 
-    this.loading = true;
-
-    this.authService.setPassword({
-      email: this.email as string,
-      password: password!,
-      confirmPassword: confirmPassword!
-    }).subscribe({
-      next: () => {
-        this.notify.success('Account created successfully');
-        this.signupComplete.emit(true);
-        this.loading = false;
-      },
-      error: (err) => {
-        this.notify.error(err, 'Failed to set password');
-        this.loading = false;
-      }
-    });
+    this.store.dispatch(
+      AuthActions.setPassword({
+        email,
+        password: password!,
+        confirmPassword: confirmPassword!
+      })
+    );
   }
+
 }

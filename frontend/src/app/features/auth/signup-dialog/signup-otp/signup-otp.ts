@@ -6,8 +6,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { FormInputComponent } from '../../../../shared/components/form-input/form-input';
 import { ActionButton } from '../../../../shared/components/action-button/action-button';
-import { AuthService } from '../../auth.service';
-import { NotificationService } from '../../../../shared/services/notification.service';
+import { Store } from '@ngrx/store';
+import * as AuthActions from '../../store/auth.actions'
 
 @Component({
   selector: 'app-signup-otp',
@@ -26,16 +26,13 @@ import { NotificationService } from '../../../../shared/services/notification.se
 export class SignupOtp {
 
   @Input() email: string | null = null;
-  @Input() loading = false;
-
-  @Output() verified = new EventEmitter<void>();
+  @Input() loading: boolean | null = false;
 
   public form!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private notify: NotificationService
+    private store: Store,
   ) {
     this.form = this.fb.group({
       otp: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]]
@@ -50,20 +47,12 @@ export class SignupOtp {
       return;
     }
 
-    this.loading = true;
+    const otp = this.form.value.otp!;
+    const email = this.email as string;
 
-    this.authService.verifySignupOtp({
-      email: this.email as string,
-      otp: this.form.value.otp!
-    }).subscribe({
-      next: () => {
-        this.loading = false;
-        this.verified.emit();
-      },
-      error: (err: any) => {
-        this.loading = false;
-        this.notify.error(err, 'Invalid OTP');
-      }
-    });
+    this.store.dispatch(
+      AuthActions.verifySignupOtp({ email, otp })
+    );
   }
+
 }

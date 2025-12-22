@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { LoginDialog } from './login-dialog/login-dialog';
+import { LoginDialog } from '../login-dialog/login-dialog';
 
 @Injectable({ providedIn: 'root' })
 export class AuthModalService {

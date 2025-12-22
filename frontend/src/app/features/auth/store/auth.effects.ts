@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
-
-import { AuthService } from '../auth.service';
-import * as AuthActions from './auth.actions';
-import { NotificationService } from '../../../shared/services/notification.service';
 import { Router } from '@angular/router';
+
+import * as AuthActions from './auth.actions';
+import { AuthService } from '../services/auth.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 
 @Injectable()
 export class AuthEffects {
@@ -33,7 +33,6 @@ export class AuthEffects {
             })
         )
     );
-
 
     login$ = createEffect(() =>
         this.actions$.pipe(
@@ -63,8 +62,6 @@ export class AuthEffects {
                             );
                         }
 
-                        this.notify.error(err, 'Login failed');
-
                         return of(
                             AuthActions.loginFailure({
                                 error: message || 'Login failed',
@@ -72,10 +69,20 @@ export class AuthEffects {
                             })
                         );
                     })
-
                 )
             )
         )
+    );
+
+    loginFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.loginFailure),
+                tap(({ error }) => {
+                    this.notify.error(error);
+                })
+            ),
+        { dispatch: false }
     );
 
     logout$ = createEffect(
@@ -106,18 +113,177 @@ export class AuthEffects {
                         AuthActions.updateProfileSuccess({ user })
                     ),
 
-                    catchError(err => {
-                        this.notify.error(err, 'Failed to update profile');
-
-                        return of(
+                    catchError(err =>
+                        of(
                             AuthActions.updateProfileFailure({
                                 error: err?.error?.message || 'Update failed'
                             })
-                        );
-                    })
+                        )
+                    )
                 )
             )
         )
     );
+
+    updateProfileSuccess$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.updateProfileSuccess),
+                tap(() => {
+                    this.notify.success('Profile updated successfully');
+                })
+            ),
+        { dispatch: false }
+    );
+
+    updateProfileFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.updateProfileFailure),
+                tap(({ error }) => {
+                    this.notify.error(error);
+                })
+            ),
+        { dispatch: false }
+    );
+
+    register$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.register),
+
+            switchMap(({ name, email }) =>
+                this.authService.register({ name, email }).pipe(
+
+                    map(() =>
+                        AuthActions.registerSuccess({ email })
+                    ),
+
+                    catchError(err =>
+                        of(
+                            AuthActions.registerFailure({
+                                error: err?.error?.message || 'Failed to send OTP'
+                            })
+                        )
+                    )
+                )
+            )
+        )
+    );
+
+    registerSuccess$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.registerSuccess),
+                tap(() => {
+                    this.notify.success('OTP sent successfully');
+                })
+            ),
+        { dispatch: false }
+    );
+
+    registerFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.registerFailure),
+                tap(({ error }) => {
+                    this.notify.error(error);
+                })
+            ),
+        { dispatch: false }
+    );
+
+    verifySignupOtp$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.verifySignupOtp),
+
+            switchMap(({ email, otp }) =>
+                this.authService.verifySignupOtp({ email, otp }).pipe(
+
+                    map(() =>
+                        AuthActions.verifySignupOtpSuccess()
+                    ),
+
+                    catchError(err =>
+                        of(
+                            AuthActions.verifySignupOtpFailure({
+                                error: err?.error?.message || 'Invalid OTP'
+                            })
+                        )
+                    )
+                )
+            )
+        )
+    );
+
+    verifySignupOtpSuccess$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.verifySignupOtpSuccess),
+                tap(() => {
+                    this.notify.success('OTP verified successfully');
+                })
+            ),
+        { dispatch: false }
+    );
+
+    verifySignupOtpFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.verifySignupOtpFailure),
+                tap(({ error }) => {
+                    this.notify.error(error);
+                })
+            ),
+        { dispatch: false }
+    );
+
+    setPassword$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.setPassword),
+
+            switchMap(({ email, password, confirmPassword }) =>
+                this.authService
+                    .setPassword({ email, password, confirmPassword })
+                    .pipe(
+
+                        map(() =>
+                            AuthActions.setPasswordSuccess()
+                        ),
+
+                        catchError(err =>
+                            of(
+                                AuthActions.setPasswordFailure({
+                                    error: err?.error?.message || 'Failed to set password'
+                                })
+                            )
+                        )
+                    )
+            )
+        )
+    );
+
+    setPasswordSuccess$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.setPasswordSuccess),
+                tap(() => {
+                    this.notify.success('Account created successfully');
+                })
+            ),
+        { dispatch: false }
+    );
+
+    setPasswordFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.setPasswordFailure),
+                tap(({ error }) => {
+                    this.notify.error(error);
+                })
+            ),
+        { dispatch: false }
+    );
+
+
 
 }

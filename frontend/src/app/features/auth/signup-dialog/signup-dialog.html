@@ -12,18 +12,17 @@
         <mat-dialog-content>
 
             <ng-container *ngIf="currentStep === SignupStep.REGISTER">
-                <app-signup-register [loading]="loading" (registered)="handleRegistered($event)">
+                <app-signup-register [loading]="loading$ | async">
                 </app-signup-register>
             </ng-container>
 
             <ng-container *ngIf="currentStep === SignupStep.VERIFY_OTP">
-                <app-signup-otp [email]="email" [loading]="loading"
-                    (verified)="setCurrentStep(SignupStep.SET_PASSWORD)">
+                <app-signup-otp [email]="email" [loading]="loading$ | async">
                 </app-signup-otp>
             </ng-container>
 
             <ng-container *ngIf="currentStep === SignupStep.SET_PASSWORD">
-                <app-signup-set-password [email]="email" [loading]="loading" (signupComplete)="closeDialog()">
+                <app-signup-set-password [email]="email" [loading]="loading$ | async">
                 </app-signup-set-password>
             </ng-container>
 

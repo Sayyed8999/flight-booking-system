@@ -6,9 +6,9 @@ import { Store } from '@ngrx/store';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import * as BookingActions from '../bookings/store/booking.actions';
-import { selectMyBookings, selectBookingLoading } from '../bookings/store/booking.selectors';
 import { Router } from '@angular/router';
+import { selectBookingLoading, selectMyBookings } from '../../store/booking.selectors';
+import * as BookingActions from '../../store/booking.actions';
 
 @Component({
   standalone: true,

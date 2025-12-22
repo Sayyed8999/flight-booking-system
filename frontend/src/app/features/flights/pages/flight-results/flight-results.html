@@ -1,6 +1,13 @@
 <section class="flight-results">
+    <div class="results-header">
+        <button mat-icon-button (click)="navigateToFlights()" aria-label="Back to search">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
 
-    @if (loading) {
+        <h1 class="page-title">Flight Results</h1>
+    </div>
+
+    @if (loading$ | async) {
     <div class="flex-center mt-100">
         <mat-spinner diameter="50"></mat-spinner>
     </div>
@@ -16,7 +23,7 @@
     }
 
     @if (results.outboundFlights.length) {
-    <h2 class="section-title">Outbound Flights</h2>
+    <h3 class="section-title">Outbound Flights</h3>
     }
 
     @for (flight of results.outboundFlights; track flight._id) {
@@ -51,7 +58,7 @@
 
     @if (results.returnFlights?.length) {
 
-    <h2 class="section-title mt-40">Return Flights</h2>
+    <h3 class="section-title mt-40">Return Flights</h3>
 
     @for (flight of results.returnFlights; track flight._id) {
     <mat-card class="flight-card">

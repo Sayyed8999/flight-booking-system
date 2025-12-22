@@ -3,12 +3,12 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { switchMap, withLatestFrom, map, catchError, tap } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 
 import * as BookingActions from './booking.actions';
-import { Store } from '@ngrx/store';
+import { selectPassengerDetails, selectSelectedFlight } from './booking.selectors';
 import { BookingApiService } from '../services/booking-api.service';
 import { NotificationService } from '../../../shared/services/notification.service';
-import { selectPassengerDetails, selectSelectedFlight } from './booking.selectors';
 
 @Injectable()
 export class BookingEffects {
@@ -114,6 +114,16 @@ export class BookingEffects {
         )
     );
 
+    loadMyBookingsFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(BookingActions.loadMyBookingsFailure),
+                tap(({ error }) => this.notify.error(error))
+            ),
+        { dispatch: false }
+    );
+
+
     loadBookingById$ = createEffect(() =>
         this.actions$.pipe(
             ofType(BookingActions.loadBookingById),
@@ -121,11 +131,30 @@ export class BookingEffects {
                 this.api.getBookingById(bookingId).pipe(
                     map(res =>
                         BookingActions.loadBookingByIdSuccess({ booking: res.booking })
+                    ),
+                    catchError(err =>
+                        of(
+                            BookingActions.loadBookingByIdFailure({
+                                error: err?.error?.message || 'Failed to load booking'
+                            })
+                        )
                     )
                 )
             )
         )
     );
+
+    loadBookingByIdFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(BookingActions.loadBookingByIdFailure),
+                tap(({ error }) => {
+                    this.notify.error(error);
+                })
+            ),
+        { dispatch: false }
+    );
+
 
     cancelBooking$ = createEffect(() =>
         this.actions$.pipe(
@@ -135,11 +164,41 @@ export class BookingEffects {
                     map(() =>
                         BookingActions.cancelBookingSuccess({ bookingId })
                     ),
-                    tap(() => this.router.navigate(['/bookings']))
+                    catchError(err =>
+                        of(
+                            BookingActions.cancelBookingFailure({
+                                error: err?.error?.message || 'Failed to cancel booking'
+                            })
+                        )
+                    )
                 )
             )
         )
     );
+
+    cancelBookingSuccess$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(BookingActions.cancelBookingSuccess),
+                tap(() => {
+                    this.notify.success('Booking cancelled successfully');
+                    this.router.navigate(['/bookings']);
+                })
+            ),
+        { dispatch: false }
+    );
+
+    cancelBookingFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(BookingActions.cancelBookingFailure),
+                tap(({ error }) => {
+                    this.notify.error(error);
+                })
+            ),
+        { dispatch: false }
+    );
+
 
 
 }
