@@ -6,8 +6,6 @@ import {
     loginUser,
     resendSignupOtp
 } from './auth.service';
-import { UserModel } from '../users/users.model';
-import { generateOtp } from './auth.utils';
 
 export const registerController = async (req: Request, res: Response) => {
     try {

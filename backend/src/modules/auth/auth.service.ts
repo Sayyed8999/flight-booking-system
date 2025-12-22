@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import { UserModel } from '../users/users.model';
-import { generateOtp, sendOtpEmail } from './auth.utils';
+import { generateOtp } from './auth.utils';
 import jwt from 'jsonwebtoken';
 import { sendOtp } from '../../utils/otp';
 
