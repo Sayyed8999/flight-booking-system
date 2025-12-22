@@ -38,22 +38,22 @@ npm -v
 # Install Angular CLI (required for frontend):
 npm install -g @angular/cli@20
 
-#Verify installation:
+# Verify installation:
 ng version
  
-#1️⃣ Clone the Repository
+# 1️⃣ Clone the Repository
 git clone https://github.com/Sayyed8999/flight-booking-system.git
 cd flight-booking-system
 
-#🖥️ Frontend Setup (Angular) 
+# 🖥️ Frontend Setup (Angular) 
 cd frontend
 npm install
 ng serve
 
-#Frontend will be available at:
+# Frontend will be available at:
 http://localhost:4200
 
-#🗄️ Backend Setup (Node.js + Express)
+# 🗄️ Backend Setup (Node.js + Express)
 cd backend
 npm install
 
@@ -68,9 +68,8 @@ npm run dev
 
 # Backend API will be available at:
 http://localhost:4000
-```
 
-<!-- Project Structure -->
+# Project Structure 
 flight-booking-system/
 │
 ├── frontend/        # Angular 20 application
@@ -81,6 +80,9 @@ flight-booking-system/
 │   └── package.json
 │
 └── README.md
+```
+
+
 
 
 ✅ Notes
@@ -135,8 +137,6 @@ MongoDB can be local or hosted (Atlas)
 - Reusable form components (ControlValueAccessor)
 - Backend modular structure
 - Strict typing & validation
-
----
 
 ---
 
