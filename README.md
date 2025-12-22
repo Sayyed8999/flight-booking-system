@@ -7,6 +7,14 @@ This project demonstrates **real-world architecture**, clean state management wi
 
 ## 🧰 Tech Stack
 
+```bash
+• Architecture: Monorepo
+  ├─ flight-booking-system/
+  │  ├─ frontend/ (Angular)
+  │  ├─ backend/  (Node API)
+  │  └─ root package.json (orchestration only)
+```
+
 ### Frontend
 - Angular **20** (Standalone Components)
 - Angular Material
