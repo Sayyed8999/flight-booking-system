@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import * as BookingActions from '../../../store/booking.actions';
 import { selectSelectedBooking } from '../../../store/booking.selectors';
 import { ConfirmDialogComponent } from '../../../../../shared/components/confirm-dialog/confirm-dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   standalone: true,
@@ -15,7 +16,8 @@ import { ConfirmDialogComponent } from '../../../../../shared/components/confirm
   imports: [
     CommonModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   templateUrl: './booking-details.html',
   styleUrl: './booking-details.scss'
@@ -41,6 +43,11 @@ export class BookingDetails implements OnInit {
       BookingActions.loadBookingById({ bookingId })
     );
   }
+
+  public navigateToBookings(): void {
+    this.router.navigate(['/bookings']);
+  }
+
 
   public cancelBooking(id: string): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {

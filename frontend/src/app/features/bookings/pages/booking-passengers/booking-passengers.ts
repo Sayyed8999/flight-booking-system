@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-import { FormArray, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -35,13 +35,15 @@ export class BookingPassengers implements OnInit {
   private router = inject(Router);
   private store = inject(Store);
 
-  form = this.fb.group({
+  public allowNavigation = false;
+
+  public form: FormGroup = this.fb.group({
     contactEmail: [{ value: '', disabled: true }, [Validators.required, Validators.email]],
     contactPhone: ['', Validators.required],
     passengers: this.fb.array([this.createPassenger()])
   });
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.store
       .select(selectAuthUser)
       .pipe(
@@ -55,11 +57,11 @@ export class BookingPassengers implements OnInit {
       });
   }
 
-  get passengers(): FormArray {
+  public get passengers(): FormArray {
     return this.form.get('passengers') as FormArray;
   }
 
-  createPassenger() {
+  public createPassenger() {
     return this.fb.group({
       name: ['', Validators.required],
       age: ['', Validators.required],
@@ -68,11 +70,11 @@ export class BookingPassengers implements OnInit {
     });
   }
 
-  addPassenger() {
+  public addPassenger(): void {
     this.passengers.push(this.createPassenger());
   }
 
-  removePassenger(index: number) {
+  public removePassenger(index: number): void {
     if (this.passengers.length > 1) {
       this.passengers.removeAt(index);
     }
@@ -87,8 +89,7 @@ export class BookingPassengers implements OnInit {
     }));
   }
 
-
-  submit() {
+  public submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
@@ -104,7 +105,7 @@ export class BookingPassengers implements OnInit {
       })
     );
 
+    this.allowNavigation = true;
     this.router.navigate(['/bookings/confirm']);
   }
-
 }

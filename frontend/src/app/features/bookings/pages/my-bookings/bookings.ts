@@ -9,6 +9,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
 import { selectBookingLoading, selectMyBookings } from '../../store/booking.selectors';
 import * as BookingActions from '../../store/booking.actions';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   standalone: true,
@@ -16,7 +17,8 @@ import * as BookingActions from '../../store/booking.actions';
   imports: [
     CommonModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   templateUrl: './bookings.html',
   styleUrl: './bookings.scss'
@@ -30,6 +32,10 @@ export class Bookings implements OnInit {
 
   public ngOnInit(): void {
     this.store.dispatch(BookingActions.loadMyBookings());
+  }
+
+  public navigateToFlights(): void {
+    this.router.navigate(['/flights']);
   }
 
   public openBooking(_id: any): void {

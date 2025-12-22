@@ -57,7 +57,7 @@
 
     <div class="actions">
         <button mat-stroked-button (click)="goBack()">Back</button>
-        <button mat-flat-button color="primary" (click)="confirmBooking()">
+        <button mat-flat-button color="primary" (click)="confirmBooking()" [disabled]="(vm$ | async)?.loading">
             Confirm Booking
         </button>
     </div>

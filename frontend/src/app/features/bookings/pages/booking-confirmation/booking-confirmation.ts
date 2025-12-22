@@ -10,7 +10,8 @@ import * as BookingActions from '../../store/booking.actions';
 
 import {
   selectSelectedFlight,
-  selectPassengerDetails
+  selectPassengerDetails,
+  selectBookingLoading
 } from '../../store/booking.selectors';
 
 @Component({
@@ -30,7 +31,8 @@ export class BookingConfirmation {
 
   vm$ = combineLatest({
     flight: this.store.select(selectSelectedFlight),
-    passengerDetails: this.store.select(selectPassengerDetails)
+    passengerDetails: this.store.select(selectPassengerDetails),
+    loading: this.store.select(selectBookingLoading)
   });
 
   confirmBooking() {

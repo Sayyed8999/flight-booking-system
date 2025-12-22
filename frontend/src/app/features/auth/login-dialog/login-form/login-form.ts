@@ -31,7 +31,7 @@ export class LoginForm {
     password: ['', Validators.required]
   });
 
-  submit(): void {
+  public submit(): void {
     if (this.loading) return;
 
     if (this.form.invalid) {

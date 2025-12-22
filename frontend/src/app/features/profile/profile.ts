@@ -70,7 +70,6 @@ export class Profile implements OnInit {
     this.router.navigate(['/flights']);
   }
 
-
   public submit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();

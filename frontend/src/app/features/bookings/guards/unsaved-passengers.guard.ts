@@ -4,6 +4,10 @@ import { BookingPassengers } from '../pages/booking-passengers/booking-passenger
 export const unsavedPassengersGuard: CanDeactivateFn<BookingPassengers> = (
     component
 ) => {
+    if (component.allowNavigation) {
+        return true;
+    }
+
     if (component.form.dirty) {
         return confirm(
             'You have unsaved passenger details. Are you sure you want to leave?'

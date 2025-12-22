@@ -1,6 +1,12 @@
 <div class="bookings-page">
 
-    <h1 class="page-title">My Bookings</h1>
+    <div class="bookings-header">
+        <button mat-icon-button (click)="navigateToFlights()" aria-label="Back to search">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+
+        <h1 class="page-title">My Bookings</h1>
+    </div>
 
     @if (loading$ | async) {
     <div class="center">

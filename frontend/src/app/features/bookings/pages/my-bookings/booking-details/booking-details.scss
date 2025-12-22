@@ -72,7 +72,19 @@
     opacity: 0.65;
 }
 
-/* Mobile refinements */
+.booking-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+
+    .page-title {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 600;
+    }
+}
+
 @media (max-width: 480px) {
     .details-card {
         padding: 1rem;

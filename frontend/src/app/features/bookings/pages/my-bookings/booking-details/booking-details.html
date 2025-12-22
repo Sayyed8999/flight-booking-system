@@ -3,7 +3,13 @@
 <mat-card class="details-card" appearance="outlined">
 
     <div class="header">
-        <h2 class="title">Booking Details</h2>
+        <div class="booking-header">
+            <button mat-icon-button (click)="navigateToBookings()" aria-label="Back to search">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+
+            <h1 class="page-title">Booking Details</h1>
+        </div>
         <span class="status" [ngClass]="{
               confirmed: booking.status === 'CONFIRMED',
               cancelled: booking.status === 'CANCELLED'
