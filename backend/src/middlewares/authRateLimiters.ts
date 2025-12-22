@@ -2,7 +2,7 @@ import { createRateLimiter } from './rateLimiter';
 
 export const authStrictLimiter = createRateLimiter(
     5,
-    1,
+    15,
     'Too many attempts. Please try again after 15 minutes.'
 );
 
