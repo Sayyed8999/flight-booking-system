@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import * as BookingActions from '../bookings/store/booking.actions';
 import { selectMyBookings, selectBookingLoading } from '../bookings/store/booking.selectors';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -22,12 +23,17 @@ import { selectMyBookings, selectBookingLoading } from '../bookings/store/bookin
 })
 export class Bookings implements OnInit {
   private store = inject(Store);
+  private router = inject(Router);
 
   bookings$ = this.store.select(selectMyBookings);
   loading$ = this.store.select(selectBookingLoading);
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.store.dispatch(BookingActions.loadMyBookings());
+  }
+
+  public openBooking(_id: any): void {
+    this.router.navigate(['/bookings', _id]);
   }
 }
 

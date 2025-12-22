@@ -19,7 +19,7 @@ export interface Passenger {
 }
 
 export interface Booking {
-    id: string;
+    _id: string;
     bookingRef: string;
     flight: Flight;
     passengers: Passenger[];

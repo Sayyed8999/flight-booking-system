@@ -1,0 +1,55 @@
+@if (booking$ | async; as booking) {
+
+<mat-card class="details-card" appearance="outlined">
+
+    <div class="header">
+        <h2 class="title">Booking Details</h2>
+        <span class="status" [ngClass]="{
+              confirmed: booking.status === 'CONFIRMED',
+              cancelled: booking.status === 'CANCELLED'
+            }">
+            {{ booking.status }}
+        </span>
+    </div>
+
+    <div class="section">
+        <div class="row">
+            <span class="label">Booking Ref</span>
+            <span class="value">{{ booking.bookingRef }}</span>
+        </div>
+
+        <div class="row">
+            <span class="label">Route</span>
+            <span class="value">
+                {{ booking.flight.origin }} → {{ booking.flight.destination }}
+            </span>
+        </div>
+
+        <div class="row">
+            <span class="label">Departure</span>
+            <span class="value">
+                {{ booking.flight.departureTime | date:'medium' }}
+            </span>
+        </div>
+
+        <div class="row">
+            <span class="label">Passengers</span>
+            <span class="value">
+                {{ booking.passengers.length }}
+            </span>
+        </div>
+    </div>
+
+    @if (booking.status === 'CONFIRMED') {
+    <div class="actions">
+        <button mat-flat-button color="warn" (click)="cancelBooking(booking._id)">
+            Cancel Booking
+        </button>
+    </div>
+    }
+
+</mat-card>
+
+} @else {
+<p class="empty">Booking not foundd</p>
+}

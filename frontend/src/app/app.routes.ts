@@ -47,8 +47,14 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./features/bookings/pages/booking-success/booking-success')
                         .then(m => m.BookingSuccess)
-            }
-            ,
+            },
+            {
+                path: 'bookings/:id',
+                canActivate: [authGuard],
+                loadComponent: () =>
+                    import('./features/my-bookings/booking-details/booking-details')
+                        .then(m => m.BookingDetails)
+            },
             {
                 path: '',
                 pathMatch: 'full',

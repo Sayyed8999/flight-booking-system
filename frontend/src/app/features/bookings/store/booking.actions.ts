@@ -41,5 +41,25 @@ export const loadMyBookingsFailure = createAction(
     props<{ error: string }>()
 );
 
+export const loadBookingById = createAction(
+    '[Booking] Load Booking By Id',
+    props<{ bookingId: string }>()
+);
+
+export const loadBookingByIdSuccess = createAction(
+    '[Booking] Load Booking By Id Success',
+    props<{ booking: Booking }>()
+);
+
+export const cancelBooking = createAction(
+    '[Booking] Cancel Booking',
+    props<{ bookingId: string }>()
+);
+
+export const cancelBookingSuccess = createAction(
+    '[Booking] Cancel Booking Success',
+    props<{ bookingId: string }>()
+);
+
 
 export const clearBooking = createAction('[Booking] Clear Booking');

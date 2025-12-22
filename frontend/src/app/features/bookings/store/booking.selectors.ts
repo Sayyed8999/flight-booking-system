@@ -39,4 +39,10 @@ export const selectBookingError = createSelector(
     state => state.error
 );
 
+export const selectSelectedBooking = createSelector(
+    selectBookingState,
+    state => state.selectedBooking
+);
+
+
 

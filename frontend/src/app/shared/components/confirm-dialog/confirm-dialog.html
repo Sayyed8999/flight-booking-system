@@ -1,0 +1,17 @@
+<div class="dialog" [ngClass]="data.variant || 'warning'">
+
+    <p class="message">
+        {{ data.message }}
+    </p>
+
+    <div class="actions">
+        <button mat-button (click)="cancel()">
+            {{ data.secondaryButton }}
+        </button>
+
+        <button mat-flat-button [color]="data.variant === 'error' ? 'warn' : 'primary'" (click)="confirm()">
+            {{ data.primaryButton }}
+        </button>
+    </div>
+
+</div>

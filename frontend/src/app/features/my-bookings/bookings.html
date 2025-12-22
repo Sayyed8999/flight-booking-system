@@ -18,8 +18,8 @@
     </p>
     } @else {
 
-    @for (b of bookings; track b.id) {
-    <mat-card class="booking-card" appearance="outlined">
+    @for (b of bookings; track b._id) {
+    <mat-card class="booking-card" appearance="outlined" (click)="openBooking(b._id)" tabindex="0">
 
         <div class="card-header">
             <div class="airline">
@@ -42,7 +42,10 @@
                 {{ b.flight.departureTime | date:'medium' }}
             </span>
 
-            <span class="status confirmed">
+            <span class="status" [ngClass]="{
+                confirmed: b.status === 'CONFIRMED',
+                cancelled: b.status === 'CANCELLED'
+            }">
                 {{ b.status }}
             </span>
         </div>

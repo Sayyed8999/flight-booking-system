@@ -7,6 +7,7 @@ export interface BookingState {
     contactPhone?: string | null;
     booking: Booking | null;
     bookings: Booking[];
+    selectedBooking: any;
     loading: boolean;
     error: string | null;
 }
@@ -18,6 +19,7 @@ export const initialBookingState: BookingState = {
     contactEmail: null,
     contactPhone: null,
     booking: null,
+    selectedBooking: null,
     loading: false,
     error: null
 };

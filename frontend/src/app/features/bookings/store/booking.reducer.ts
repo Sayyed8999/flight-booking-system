@@ -64,5 +64,17 @@ export const bookingReducer = createReducer(
         ...state,
         loading: false,
         error
-    }))
+    })),
+    on(BookingActions.loadBookingByIdSuccess, (state, { booking }) => ({
+        ...state,
+        selectedBooking: booking
+    })),
+
+    on(BookingActions.cancelBookingSuccess, (state, { bookingId }) => ({
+        ...state,
+        bookings: state.bookings.map(b =>
+            b._id === bookingId ? { ...b, status: 'CANCELLED' } : b
+        ),
+        selectedBooking: null
+    })),
 );

@@ -31,7 +31,6 @@ import { INDIAN_AIRPORTS } from '../../../../shared/data/indian-airports';
     MatSelectModule,
     MatDatepickerModule,
     SelectListComponent,
-    FormInputComponent,
     DateInputComponent,
     NumberInputComponent,
     SearchableSelectList

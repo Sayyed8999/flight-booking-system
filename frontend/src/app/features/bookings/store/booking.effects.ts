@@ -114,4 +114,32 @@ export class BookingEffects {
         )
     );
 
+    loadBookingById$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(BookingActions.loadBookingById),
+            switchMap(({ bookingId }) =>
+                this.api.getBookingById(bookingId).pipe(
+                    map(res =>
+                        BookingActions.loadBookingByIdSuccess({ booking: res.booking })
+                    )
+                )
+            )
+        )
+    );
+
+    cancelBooking$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(BookingActions.cancelBooking),
+            switchMap(({ bookingId }) =>
+                this.api.cancelBooking(bookingId).pipe(
+                    map(() =>
+                        BookingActions.cancelBookingSuccess({ bookingId })
+                    ),
+                    tap(() => this.router.navigate(['/bookings']))
+                )
+            )
+        )
+    );
+
+
 }

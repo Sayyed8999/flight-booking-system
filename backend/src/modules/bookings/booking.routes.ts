@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createBooking, getMyBookings } from './booking.controller';
+import { cancelBooking, createBooking, getBookingById, getMyBookings } from './booking.controller';
 import { validate } from '../../middlewares/validate';
 import { createBookingSchema } from './booking.validation';
 import { authMiddleware } from '../../middlewares/auth.middleware';
@@ -18,6 +18,10 @@ router.get(
     authMiddleware,
     getMyBookings
 );
+
+router.get('/:id', authMiddleware, getBookingById);
+
+router.patch('/:id/cancel', authMiddleware, cancelBooking);
 
 
 export default router;
