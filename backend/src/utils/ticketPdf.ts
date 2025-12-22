@@ -8,7 +8,6 @@ export const generateTicketPdf = (booking: any): Promise<Buffer> => {
         doc.on('data', buffers.push.bind(buffers));
         doc.on('end', () => resolve(Buffer.concat(buffers)));
 
-        // Header
         doc
             .fontSize(20)
             .text('Flight Booking E-Ticket', { align: 'center' })
