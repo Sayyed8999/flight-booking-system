@@ -24,9 +24,13 @@ import * as AuthActions from '../../store/auth.actions'
   styleUrls: ['./signup-otp.scss']
 })
 export class SignupOtp {
-
   @Input() email: string | null = null;
   @Input() loading: boolean | null = false;
+  @Input() redirectedFromLogin: boolean | null = false;
+
+  resendDisabled = false;
+  resendCountdown = 60;
+  private resendTimer?: any;
 
   public form!: FormGroup;
 
@@ -37,6 +41,14 @@ export class SignupOtp {
     this.form = this.fb.group({
       otp: ['', [Validators.required, Validators.pattern(/^\d{6}$/)]]
     });
+  }
+
+  public ngOnInit(): void {
+    if (this.redirectedFromLogin) {
+      this.resendOtp()
+    } else {
+      this.startResendCooldown();
+    }
   }
 
   public submit(): void {
@@ -54,5 +66,39 @@ export class SignupOtp {
       AuthActions.verifySignupOtp({ email, otp })
     );
   }
+
+  private startResendCooldown(): void {
+    this.resendDisabled = true;
+    this.resendCountdown = 60;
+
+    this.resendTimer = setInterval(() => {
+      this.resendCountdown--;
+
+      if (this.resendCountdown === 0) {
+        this.resendDisabled = false;
+        clearInterval(this.resendTimer);
+      }
+    }, 1000);
+  }
+
+
+  public resendOtp(): void {
+    if (this.loading || this.resendDisabled) return;
+
+    const email = this.email as string;
+
+    this.store.dispatch(
+      AuthActions.resendSignupOtp({ email })
+    );
+
+    this.startResendCooldown();
+  }
+
+  public ngOnDestroy(): void {
+    if (this.resendTimer) {
+      clearInterval(this.resendTimer);
+    }
+  }
+
 
 }

@@ -10,8 +10,24 @@
     <app-form-input label="OTP" formControlName="otp" placeholder="Enter a valid 6-digit OTP">
     </app-form-input>
 
-    <app-action-button type="submit" color="primary" [panelClass]="'mt-10'" [loading]="loading" mainText="Verify OTP"
-        loadingText="Verifying…">
+    <app-action-button type="submit" color="primary" [panelClass]="'mt-10'" [loading]="loading" mainText="Verify OTP">
     </app-action-button>
+
+    <p class="resend">
+        Didn’t receive OTP?
+
+        <button mat-button type="button" color="primary" class="resend-btn" [disabled]="loading || resendDisabled"
+            (click)="resendOtp()">
+            <ng-container *ngIf="!resendDisabled">
+                Resend OTP
+            </ng-container>
+
+            <ng-container *ngIf="resendDisabled">
+                Resend OTP in {{ resendCountdown }}s
+            </ng-container>
+        </button>
+    </p>
+
+
 
 </form>

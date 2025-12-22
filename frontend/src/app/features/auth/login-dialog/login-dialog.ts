@@ -11,8 +11,9 @@ import {
   selectAuthUser
 } from '../store/auth.selectors';
 import { LoginForm } from './login-form/login-form';
-import { filter } from 'rxjs';
 import { SignupStep } from '../models/auth.types';
+import { Actions, ofType } from '@ngrx/effects';
+import * as AuthActions from '../store/auth.actions'
 
 @Component({
   selector: 'app-login-dialog',
@@ -35,31 +36,32 @@ export class LoginDialog implements OnDestroy {
 
   public loading$ = this.store.select(selectAuthLoading);
 
-  constructor() {
+  constructor(private actions$: Actions) {
+    this.actions$
+      .pipe(
+        ofType(AuthActions.openSignupFlow),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(({ email }) => {
+        this.dialogRef.close();
+
+        this.dialog.open(SignupDialog, {
+          width: '100%',
+          maxWidth: '420px',
+          autoFocus: false,
+          data: {
+            email,
+            startStep: SignupStep.VERIFY_OTP
+          }
+        });
+      });
+
     this.store.select(selectAuthUser)
       .pipe(takeUntil(this.destroy$))
       .subscribe(user => {
         if (user) {
           this.dialogRef.close();
         }
-      });
-
-    this.store.select(state => state.auth)
-      .pipe(
-        takeUntil(this.destroy$),
-        filter(auth => auth.error === 'Password not set')
-      )
-      .subscribe(() => {
-        const email = this.getEmailFromForm();
-
-        this.dialogRef.close();
-
-        this.dialog.open(SignupDialog, {
-          data: {
-            email,
-            startStep: SignupStep.VERIFY_OTP
-          }
-        });
       });
   }
 

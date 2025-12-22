@@ -20,5 +20,7 @@ export enum AuthApiEndpoint {
     REGISTER = '/register',
     VERIFY_SIGNUP_OTP = '/verify-signup-otp',
     SET_PASSWORD = '/set-password',
-    LOGIN = '/login'
+    LOGIN = '/login',
+    USERS_ME = '/api/users/me',
+    RESEND_SIGNUP_OTP = '/resend-signup-otp'
 }

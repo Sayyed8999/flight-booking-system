@@ -38,9 +38,15 @@ export class AuthService {
 
     public updateProfile(payload: { name: string }) {
         return this.http.patch<AuthUser>(
-            `${environment.apiBaseUrl}/api/users/me`,
+            `${environment.apiBaseUrl}${AuthApiEndpoint.USERS_ME}`,
             payload
         );
     }
 
+    public resendSignupOtp(payload: { email: string }) {
+        return this.http.post<void>(
+            `${this.baseUrl}${AuthApiEndpoint.RESEND_SIGNUP_OTP}`,
+            payload
+        );
+    }
 }

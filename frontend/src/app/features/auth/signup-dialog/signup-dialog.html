@@ -10,14 +10,14 @@
 
     <div class="auth-dialog-panel">
         <mat-dialog-content>
-
             <ng-container *ngIf="currentStep === SignupStep.REGISTER">
                 <app-signup-register [loading]="loading$ | async">
                 </app-signup-register>
             </ng-container>
 
             <ng-container *ngIf="currentStep === SignupStep.VERIFY_OTP">
-                <app-signup-otp [email]="email" [loading]="loading$ | async">
+                <app-signup-otp [email]="email" [loading]="loading$ | async"
+                    [redirectedFromLogin]="redirectedFromLogin">
                 </app-signup-otp>
             </ng-container>
 

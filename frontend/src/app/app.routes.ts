@@ -59,6 +59,12 @@ export const routes: Routes = [
                 path: '',
                 pathMatch: 'full',
                 redirectTo: 'flights'
+            },
+            {
+                path: '**',
+                loadComponent: () =>
+                    import('./shared/pages/not-found/not-found')
+                        .then(m => m.NotFound)
             }
         ]
     }

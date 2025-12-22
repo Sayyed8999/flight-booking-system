@@ -11,6 +11,9 @@ export class NotificationService {
     constructor(private snackBar: MatSnackBar) { }
 
     public error(error: any, fallbackMessage = 'Something went wrong'): void {
+        if (typeof error === 'string') {
+            fallbackMessage = error
+        }
         const message =
             error?.error?.message ||
             error?.message ||

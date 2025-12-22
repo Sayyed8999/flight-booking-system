@@ -4,7 +4,6 @@ import * as AuthActions from './auth.actions';
 
 export const authReducer = createReducer(
     initialAuthState,
-
     on(AuthActions.login, state => ({
         ...state,
         loading: true,
@@ -22,6 +21,10 @@ export const authReducer = createReducer(
         ...state,
         loading: false,
         error
+    })),
+    on(AuthActions.openSignupFlow, (state) => ({
+        ...state,
+        loading: false
     })),
 
     on(AuthActions.logout, () => initialAuthState),
@@ -44,5 +47,16 @@ export const authReducer = createReducer(
         loading: false,
         error
     })),
-
+    on(AuthActions.resendSignupOtp, state => ({
+        ...state,
+        loading: true
+    })),
+    on(
+        AuthActions.resendSignupOtpSuccess,
+        AuthActions.resendSignupOtpFailure,
+        state => ({
+            ...state,
+            loading: false
+        })
+    )
 );

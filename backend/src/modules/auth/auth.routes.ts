@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { registerController, loginController, verifySignupOtpController, setPasswordController } from './auth.controller';
+import { registerController, loginController, verifySignupOtpController, setPasswordController, resendSignupOtpController } from './auth.controller';
 import { validate } from '../../middlewares/validate';
 import { registerSchema, loginSchema, verifyOtpSchema, setPasswordSchema } from './auth.validation';
 import { authModerateLimiter, authStrictLimiter } from '../../middlewares/authRateLimiters';
@@ -34,6 +34,11 @@ router.post(
     loginController
 );
 
+router.post(
+    '/resend-signup-otp',
+    authStrictLimiter,
+    resendSignupOtpController
+);
 
 router.post('/login', validate(loginSchema), loginController);
 

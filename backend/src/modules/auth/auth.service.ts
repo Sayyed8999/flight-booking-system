@@ -36,7 +36,6 @@ export const verifySignupOtp = async (email: string, otp: string) => {
     const user = await UserModel.findOne({ email });
 
     if (!user) throw new Error('User not found');
-    if (user.isVerified) throw new Error('User already verified');
 
     if (
         user.signupOtp !== otp ||
@@ -112,4 +111,22 @@ export const loginUser = async (email: string, password: string) => {
             role: user.role
         }
     };
+};
+
+export const resendSignupOtp = async (email: string) => {
+    const user = await UserModel.findOne({ email });
+
+    if (!user) {
+        throw new Error('User not found');
+    }
+
+    const otp = generateOtp();
+    const otpExpiry = new Date(Date.now() + 10 * 60 * 1000);
+
+    user.signupOtp = otp;
+    user.signupOtpExpiresAt = otpExpiry;
+
+    await user.save();
+
+    await sendOtp({ email, otp });
 };

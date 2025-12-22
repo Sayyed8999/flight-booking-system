@@ -53,12 +53,9 @@ export class AuthEffects {
                     catchError(err => {
                         const message = err?.error?.message;
 
-                        if (message === 'Password not set') {
+                        if (message === 'Password not set' || message === 'Email not verified') {
                             return of(
-                                AuthActions.loginFailure({
-                                    error: message,
-                                    code: 'PASSWORD_NOT_SET'
-                                })
+                                AuthActions.openSignupFlow({ email })
                             );
                         }
 
@@ -284,6 +281,46 @@ export class AuthEffects {
         { dispatch: false }
     );
 
+
+    resendSignupOtp$ = createEffect(() =>
+        this.actions$.pipe(
+            ofType(AuthActions.resendSignupOtp),
+            switchMap(({ email }) =>
+                this.authService.resendSignupOtp({ email }).pipe(
+                    map(() => AuthActions.resendSignupOtpSuccess()),
+                    catchError(err =>
+                        of(
+                            AuthActions.resendSignupOtpFailure({
+                                error: err?.error?.message || 'Failed to resend OTP'
+                            })
+                        )
+                    )
+                )
+            )
+        )
+    );
+
+    resendSignupOtpSuccess$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.resendSignupOtpSuccess),
+                tap(() => {
+                    this.notify.success('OTP resent successfully');
+                })
+            ),
+        { dispatch: false }
+    );
+
+    resendSignupOtpFailure$ = createEffect(
+        () =>
+            this.actions$.pipe(
+                ofType(AuthActions.resendSignupOtpFailure),
+                tap(({ error }) => {
+                    this.notify.error(error);
+                })
+            ),
+        { dispatch: false }
+    );
 
 
 }

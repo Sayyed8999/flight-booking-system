@@ -3,8 +3,11 @@ import {
     registerUser,
     verifySignupOtp,
     setPassword,
-    loginUser
+    loginUser,
+    resendSignupOtp
 } from './auth.service';
+import { UserModel } from '../users/users.model';
+import { generateOtp } from './auth.utils';
 
 export const registerController = async (req: Request, res: Response) => {
     try {
@@ -64,3 +67,20 @@ export const loginController = async (req: Request, res: Response) => {
         res.status(401).json({ message: error.message });
     }
 };
+
+export const resendSignupOtpController = async (
+    req: Request,
+    res: Response
+) => {
+    try {
+        const { email } = req.body;
+
+        await resendSignupOtp(email);
+
+        res.status(200).json({ message: 'OTP resent successfully' });
+    } catch (error: any) {
+        res.status(400).json({ message: error.message });
+    }
+};
+
+
