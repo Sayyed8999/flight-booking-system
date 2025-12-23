@@ -50,7 +50,7 @@ git clone https://github.com/Sayyed8999/flight-booking-system.git
 ```
 
 Backend uses a dedicated Docker environment file:
-create a file '.env.docker' at backend/.env.docker (past content provided with mail)
+create a file '.env.docker' at backend/.env.docker (paste content provided with mail)
 
 ## 🚀 Run the Entire Project (Frontend + Backend + MongoDB);
 
@@ -63,7 +63,7 @@ docker compose up --build
 
 ⏳ First run may take a few minutes (images will be built).
 
-## 📋 Prerequisites with out Docker:
+## 📋 Prerequisites without Docker:
 
 Make sure the following are installed on your system:
 
