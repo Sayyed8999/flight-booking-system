@@ -3,6 +3,8 @@
 A modern **full-stack Flight Booking System** built with **Angular 20** (frontend) and **Node.js + Express + MongoDB** (backend).  
 This project demonstrates **real-world architecture**, clean state management with **NgRx**, and production-ready best practices.
 
+Demo videos: https://drive.google.com/drive/folders/1C8MYYkcklE9-NanJf7NNb1lTTVVwJaqA?usp=sharing
+
 ---
 
 ## 🧰 Tech Stack
