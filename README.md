@@ -51,8 +51,9 @@ make a clone of project using:
 git clone https://github.com/Sayyed8999/flight-booking-system.git
 ```
 
-Backend uses a dedicated Docker environment file:
-create a file '.env.docker' at backend/.env.docker (paste content provided with mail)
+## Create a .env file inside:
+## flight-booking-system/backend/.env.docker
+## paste the content of .env.docker file provided with mail
 
 ## 🚀 Run the Entire Project (Frontend + Backend + MongoDB);
 
@@ -63,7 +64,7 @@ cd flight-booking-system
 docker compose up --build
 
 # Frontend will be served locally on: 
-http://localhost:4200/ # Access this on browser
+http://localhost:4200/ # Access web-app on browser
 ```
 
 ⏳ First run may take a few minutes (images will be built).
@@ -103,9 +104,7 @@ npm install
 
 # Create a .env file inside:
 # flight-booking-system/backend/.env
-PORT=4000
-MONGO_URI=mongodb://127.0.0.1:27017/flight-booking
-JWT_SECRET=your_secret_key
+# paste the content of .env file provided with mail
 
 # Run Backend Server from flight-booking-system/backend
 npm run dev
