@@ -32,7 +32,38 @@ This project demonstrates **real-world architecture**, clean state management wi
 
 ---
 
-## 📋 Prerequisites
+## 🔧 Prerequisites (Docker):
+Install the following on your system:
+
+```bash
+Docker Desktop
+```
+Verify installation:
+```bash
+docker -v
+docker compose version
+```
+
+make a clone of project using: 
+```bash
+git clone https://github.com/Sayyed8999/flight-booking-system.git
+```
+
+Backend uses a dedicated Docker environment file:
+create a file '.env.docker' at backend/.env.docker (past content provided with mail)
+
+## 🚀 Run the Entire Project (Frontend + Backend + MongoDB);
+
+```bash
+cd flight-booking-system
+
+# Make sure Docker Desktop is on, then run following command:
+docker compose up --build 
+```
+
+⏳ First run may take a few minutes (images will be built).
+
+## 📋 Prerequisites with out Docker:
 
 Make sure the following are installed on your system:
 
