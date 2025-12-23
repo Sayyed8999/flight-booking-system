@@ -58,7 +58,10 @@ create a file '.env.docker' at backend/.env.docker (paste content provided with 
 cd flight-booking-system
 
 # Make sure Docker Desktop is on, then run following command:
-docker compose up --build 
+docker compose up --build
+
+# Frontend will be served locally on: 
+http://localhost:4200/ # Access this on browser
 ```
 
 ⏳ First run may take a few minutes (images will be built).
